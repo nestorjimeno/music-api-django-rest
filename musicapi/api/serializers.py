@@ -7,9 +7,15 @@ class GeneroMusicalSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ArtistaSerializer(serializers.ModelSerializer):
+    generos = serializers.SlugRelatedField(
+        many=True,
+        slug_field='nombre',  # Nombre del campo que deseas usar
+        queryset=GeneroMusical.objects.all()  # Queryset para obtener los objetos relacionados
+    )
+    
     class Meta:
         model = Artista
-        fields = '__all__'
+        fields = ['id', 'nombre', 'biografia', 'generos']
 
 class AlbumSerializer(serializers.ModelSerializer):
     generos = serializers.SlugRelatedField(
@@ -17,15 +23,32 @@ class AlbumSerializer(serializers.ModelSerializer):
         slug_field='nombre',  # Nombre del campo que deseas usar
         queryset=GeneroMusical.objects.all()  # Queryset para obtener los objetos relacionados
     )
-    artista = serializers.SlugRelatedField(
+    artistas = serializers.SlugRelatedField(
+        many=True,
         slug_field='nombre',  # Nombre del campo que deseas usar
         queryset=Artista.objects.all()  # Queryset para obtener los objetos relacionados
     )    
+
     class Meta:
         model = Album
-        fields = ['titulo', 'lanzamiento', 'artista', 'generos']
+        fields = ['titulo', 'lanzamiento', 'artistas', 'generos']
 
 class CancionSerializer(serializers.ModelSerializer):
+    generos = serializers.SlugRelatedField(
+        many=True,
+        slug_field='nombre',  # Nombre del campo que deseas usar
+        queryset=GeneroMusical.objects.all()  # Queryset para obtener los objetos relacionados
+    )
+    artistas = serializers.SlugRelatedField(
+        many=True,
+        slug_field='nombre',  # Nombre del campo que deseas usar
+        queryset=Artista.objects.all()  # Queryset para obtener los objetos relacionados
+    ) 
+    album = serializers.SlugRelatedField(
+        slug_field='titulo',  # Nombre del campo que deseas usar
+        queryset=Album.objects.all()  # Queryset para obtener los objetos relacionados
+    )
+
     class Meta:
         model = Cancion
-        fields = '__all__'
+        fields = ['id', 'titulo', 'album', 'artistas', 'duracion', 'generos', ]
