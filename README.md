@@ -1,31 +1,6 @@
 # Django REST API para Gestión de Música
 
-Este proyecto es una demostración de cómo desarrollar una API con Django y Django REST Framework para gestionar información relacionada con géneros musicales, artistas, álbumes y canciones. Puedes ver una explicación en detalle de todo el proceso en el blog de mi web: [nestorjimeno.com/blog](https://nestorjimeno.com/blog/creacion-de-apis-con-django-rest-framework/)
-
-## Características
-
-- Gestión de géneros musicales
-- Gestión de artistas y sus biografías
-- Gestión de álbumes y sus artistas y géneros asociados
-- Gestión de canciones, incluyendo su duración, álbum, artistas y géneros asociados
-
-## Estructura del Proyecto
-
-### `admin.py`
-
-Define cómo los modelos serán administrados en el panel de administración de Django.
-
-### `models.py`
-
-Define los modelos para géneros musicales, artistas, álbumes y canciones.
-
-### `serializers.py`
-
-Define los serializadores para convertir los modelos en formatos JSON.
-
-### `views.py`
-
-Define las vistas para manejar las operaciones de creación y listado de los modelos.
+Este proyecto es una demostración de cómo desarrollar una API con Django y Django REST Framework para gestionar información relacionada con géneros musicales, artistas, álbumes y canciones. Puedes ver una explicación en detalle de todo el proceso en el blog de mi web: [nestorjimeno.com/blog](https://nestorjimeno.com/blog/creacion-de-apis-con-django-rest-framework/).
 
 ## Instalación
 
@@ -70,6 +45,8 @@ pip install -r requirements.txt
 Realiza las migraciones de la base de datos:
 
 ```bash
+cd musicapi
+python manage.py makemigrations
 python manage.py migrate
 ```
 
@@ -78,6 +55,8 @@ Ejecuta el servidor de desarrollo:
 ```bash
 python manage.py runserver
 ```
+
+Una vez que el servidor de desarrollo está activado, podrás ver la API en tu navegador: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 ## Uso
 
