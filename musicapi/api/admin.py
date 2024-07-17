@@ -11,7 +11,12 @@ class ArtistaAdmin(admin.ModelAdmin):
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'artista', 'lanzamiento', 'genero']
+    list_display = ['titulo', 'artista', 'lanzamiento', 'mostrar_generos']
+
+    def mostrar_generos(self, obj):
+        return ", ".join([genero.nombre for genero in obj.generos.all()])
+
+    mostrar_generos.short_description = 'Géneros'
 
 @admin.register(Cancion)
 class CancionAdmin(admin.ModelAdmin):

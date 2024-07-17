@@ -12,9 +12,18 @@ class ArtistaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AlbumSerializer(serializers.ModelSerializer):
+    generos = serializers.SlugRelatedField(
+        many=True,
+        slug_field='nombre',  # Nombre del campo que deseas usar
+        queryset=GeneroMusical.objects.all()  # Queryset para obtener los objetos relacionados
+    )
+    artista = serializers.SlugRelatedField(
+        slug_field='nombre',  # Nombre del campo que deseas usar
+        queryset=Artista.objects.all()  # Queryset para obtener los objetos relacionados
+    )    
     class Meta:
         model = Album
-        fields = '__all__'
+        fields = ['titulo', 'lanzamiento', 'artista', 'generos']
 
 class CancionSerializer(serializers.ModelSerializer):
     class Meta:

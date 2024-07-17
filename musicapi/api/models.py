@@ -18,7 +18,7 @@ class Album(models.Model):
     titulo = models.CharField(max_length=200)
     lanzamiento = models.IntegerField()
     artista = models.ForeignKey(Artista, on_delete=models.CASCADE)
-    genero = models.ForeignKey(GeneroMusical, on_delete=models.CASCADE)
+    generos = models.ManyToManyField(GeneroMusical)
 
     def __str__(self):
         return self.titulo
